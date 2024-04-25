@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ShopEase</string>
+
+    <string name="price_currency">$</string>
+    <string name="product_size">Select Size</string>
+    <string name="buy_now">Buy Now</string>
 </resources>
