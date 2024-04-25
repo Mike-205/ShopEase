@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Sneakers",
+    "image": "shoes4.jpg",
+    "price": 20.0,
+    "rating": 4.0
+  },
+  {
+    "name": "Swimming Pants",
+    "image": "sweatpant4.jpg",
+    "price": 10.0,
+    "rating": 3.0
+  },
+  {
+    "name": "Jacket S",
+    "image": "top5.jpg",
+    "price": 12.0,
+    "rating": 4.0
+  },
+  {
+    "name": "Checked Shirt",
+    "image": "shirt3.jpg",
+    "price": 15.0,
+    "rating": 3.5
+  },
+  {
+    "name": "Blue T-Shirt",
+    "image": "t_shirt1.jpg",
+    "price": 10.0,
+    "rating": 3.2
+  },
+  {
+    "name": "Blue Top",
+    "image": "top1.jpg",
+    "price": 28.0,
+    "rating": 4.4
+  },
+  {
+    "name": "Nike Shoes",
+    "image": "shoes1.jpg",
+    "price": 30.0,
+    "rating": 4.5
+  },
+  {
+    "name": "Black T-shirt",
+    "image": "t_shirt2.jpg",
+    "price": 14.0,
+    "rating": 4.0
+  },
+  {
+    "name": "Mockup Sweatpants",
+    "image": "sweatpant1.jpg",
+    "price": 17.0,
+    "rating": 3.5
+  },
+  {
+    "name": "Official Shirt",
+    "image": "shirt5.jpg",
+    "price": 17.0,
+    "rating": 3.5
+  }
+]
