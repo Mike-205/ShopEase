@@ -3,7 +3,6 @@ package com.example.shopease.viewModel
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.shopease.R
 import com.example.shopease.model.CategoryModel
@@ -66,7 +65,7 @@ class MainViewModel(private val context: Context) : ViewModel() {
 
     private fun loadRecommendedData() {
         viewModelScope.launch {
-            val inputStream = context.resources.openRawResource(R.raw.recommended)
+            val inputStream = context.resources.openRawResource(R.raw.data)
             val json = inputStream.bufferedReader().use { it.readText() }
             val jsonArray = JSONArray(json)
 

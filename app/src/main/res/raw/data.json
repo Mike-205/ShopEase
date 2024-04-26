@@ -1,0 +1,389 @@
+[
+  {
+    "category": "Shoes",
+    "description": "These are the best sneakers you can find in the market. They are very comfortable and durable. They are made of high quality materials and are very stylish. They are perfect for any occasion and can be worn with any outfit. They are available in different colors and sizes. Get yours today and step out in style.",
+    "image": "shoes4.jpg",
+    "name": "Sneakers",
+    "price": 20.0,
+    "rating": 4.0,
+    "sizes": [
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42",
+      "43"
+    ]
+  },
+  {
+    "category": "Bottoms",
+    "description": "Our swimming pants are more than just poolside chic. The quick-drying material wicks away moisture, keeping you comfortable all day long. Plus, the chlorine resistance ensures your pants stay vibrant and functional season after season. With a wide range of sizes and colors, you can find the perfect pair for your next swim.",
+    "image": "sweatpant4.jpg",
+    "name": "Swimming Pants",
+    "price": 10.0,
+    "rating": 3.0,
+    "sizes": [
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35"
+    ]
+  },
+  {
+    "category": "Tops",
+    "description": "From a distance, everyone will recognize the iconic Supreme logo, style, size, and placement. It's a badge of honor for streetwear enthusiasts and a conversation starter for anyone who appreciates iconic brands. But this jacket goes beyond just the logo. It's made from high-quality materials that are designed to keep you warm and comfortable in any weather. The jacket is also designed to be durable and long-lasting, so you can enjoy it for years to come.",
+    "image": "top5.jpg",
+    "name": "Supreme Jacket",
+    "price": 12.0,
+    "rating": 4.0,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Shirts",
+    "description": "This shirt is crafted from a premium fabric and its 100% pre-washed cotton for a luxuriously soft feel and relaxed fit,  a wrinkle-resistant cotton blend for easy care and a polished look. The breathable poplin weave allows for excellent airflow, keeping you cool and comfortable all day long. The relaxed fit with a slightly dropped shoulder for a modern silhouette or a tailored fit with a clean, sharp look ensures freedom of movement, making this shirt ideal for any occasion. The shirt is available in a range of sizes and colors to suit your style.",
+    "image": "shirt3.jpg",
+    "name": "Checked Shirt",
+    "price": 15.0,
+    "rating": 3.5,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "T-Shirts",
+    "description": "This t-shirt is made from a premium fabric that is soft, comfortable, and durable. The fabric is pre-washed for a luxuriously soft feel and relaxed fit. The t-shirt is designed to be breathable and moisture-wicking, keeping you cool and comfortable all day long. The relaxed fit with a slightly dropped shoulder for a modern silhouette or a tailored fit with a clean, sharp look ensures freedom of movement, making this t-shirt ideal for any occasion. The t-shirt is available in a range of sizes and colors to suit your style.",
+    "image": "t_shirt1.jpg",
+    "name": "Blue T-Shirt",
+    "price": 10.0,
+    "rating": 3.2,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Tops",
+    "description": "This sweater boasts a [describe the modern design elements, e.g., clean and minimalist silhouette with a relaxed fit, unique asymmetrical neckline, or unexpected color blocking details]. The fabric type and its benefits, e.g., premium cashmere blend for unparalleled softness and warmth, and a lightweight merino wool for breathable comfort year-round drapes beautifully on the body, offering a luxurious feel without the bulk. Comes in a range of sizes and colors to suit your style.",
+    "image": "top1.jpg",
+    "name": "Blue Top",
+    "price": 28.0,
+    "rating": 4.4,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Shoes",
+    "description": "This sweater boasts a clean and minimalist silhouette with a relaxed fit, unique asymmetrical neckline, and unexpected color blocking details. The premium cashmere blend for unparalleled softness and warmth, or a lightweight merino wool for breathable comfort year-round] drapes beautifully on the body, offering a luxurious feel without the bulk. Buy yours today and step out in style.",
+    "image": "shoes1.jpg",
+    "name": "Nike Shoes",
+    "price": 30.0,
+    "rating": 4.5,
+    "sizes": [
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42",
+      "43"
+    ]
+  },
+  {
+    "category": "T-Shirts",
+    "description": "This t-shirt is made from a premium fabric that is soft, comfortable, and durable. The fabric is pre-washed for a luxuriously soft feel and relaxed fit. The t-shirt is designed to be breathable and moisture-wicking, keeping you cool and comfortable all day long. The relaxed fit with a slightly dropped shoulder for a modern silhouette or a tailored fit with a clean, sharp look ensures freedom of movement, making this t-shirt ideal for any occasion. The t-shirt is available in a range of sizes and colors to suit your style.",
+    "image": "t_shirt2.jpg",
+    "name": "Black T-shirt",
+    "price": 14.0,
+    "rating": 4.0,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Bottoms",
+    "description": "These sweatpants are perfect for lounging around the house or running errands. They are made from a soft and comfortable fabric that will keep you warm and cozy all day long. The elastic waistband and drawstring closure ensure a perfect fit, while the side pockets provide convenient storage for your essentials. The sweatpants are available in a range of sizes and colors to suit your style.",
+    "image": "sweatpant1.jpg",
+    "name": "Mockup Sweatpants",
+    "price": 17.0,
+    "rating": 3.5,
+    "sizes": [
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33"
+    ]
+  },
+  {
+    "category": "Shirts",
+    "description": "The pristine white color acts as a blank canvas, ready to be paired with a tie and blazer for a formal presentation or worn on its own for a more relaxed yet polished look.  This versatility makes it a workhorse in any professional wardrobe. Imagine yourself walking into an important meeting, the crisp white cotton announcing your presence with quiet confidence.,",
+    "image": "shirt5.jpg",
+    "name": "Official Shirt",
+    "price": 17.0,
+    "rating": 3.5,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Shoes",
+    "description": "These boots are perfect for hiking and outdoor activities. They are durable and provide excellent traction. The waterproof material will keep your feet dry in any weather. The boots are available in a range of sizes and colors to suit your style.",
+    "image": "shoes2.jpg",
+    "name": "Sports shoe (Boots)",
+    "price": 50.0,
+    "rating": 3.7,
+    "sizes": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44"
+    ]
+  },
+  {
+    "category": "Bottoms",
+    "description": "This pants are perfect for a casual look. They are made from soft, comfortable material and come in various sizes and colors. The elastic waistband ensures a perfect fit, while the side pockets provide convenient storage for your essentials. The pants are available in a range of sizes and colors to suit your style.",
+    "image": "sweatpant6.jpg",
+    "name": "Black Sweatpants",
+    "price": 40.0,
+    "rating": 4.0,
+    "sizes": [
+      "28",
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ]
+  },
+  {
+    "category": "Tops",
+    "description": "This hoodie is made from soft, comfortable material. It's perfect for casual wear and comes in various colors. The drawstring hood and kangaroo pocket add a stylish touch, while the ribbed cuffs and hem provide a secure fit. The hoodie is available in a range of sizes to suit your style.",
+    "image": "top2.jpg",
+    "name": "Casual Hoodie",
+    "price": 30.0,
+    "rating": 4.5,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Shirts",
+    "description": "This polo shirt is made from breathable material. It's perfect for a semi-formal look. The classic design features a collar and button placket, while the short sleeves provide a comfortable fit. The shirt is available in a range of sizes and colors to suit your style.",
+    "image": "shirt1.jpg",
+    "name": "Polo Shirt with Tie",
+    "price": 25.0,
+    "rating": 3.5,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXl"
+    ]
+  },
+  {
+    "category": "T-Shirts",
+    "description": "This graphic tee is made from soft, comfortable material. It features a unique design. The tee is perfect for casual wear and comes in various sizes and colors. The tee is available in a range of sizes to suit your style.",
+    "image": "t_shirt3.jpg",
+    "name": "Graphic Blue Tee",
+    "price": 20.0,
+    "rating": 3.8,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "category": "Tops",
+    "description": "This sweater is made from warm, comfortable material. It's perfect for cold weather. The classic design features a crew neck and ribbed cuffs and hem. The sweater is available in a range of sizes and colors to suit your style.",
+    "image": "top3.jpg",
+    "name": "Warm Hoodie Sweater",
+    "price": 35.0,
+    "rating": 4.4,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "category": "Shoes",
+    "description": "These AirMax shoes are perfect for running and sports. They provide excellent support and cushioning. The breathable material keeps your feet cool and comfortable. The shoes are available in a range of sizes and colors to suit your style.",
+    "image": "shoes3.jpg",
+    "name": "AirMax Outfit",
+    "price": 45.0,
+    "rating": 4.0,
+    "sizes": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41"
+    ]
+  },
+  {
+    "category": "T-Shirts",
+    "description": "This short-sleeve tee is perfect for casual wear. It's made from soft, comfortable material and comes in various sizes and colors. The tee is available in a range of sizes to suit your style. Get yours today and step out in style.",
+    "image": "t_shirt4.jpg",
+    "name": "Short-Sleeve Tee",
+    "price": 22.0,
+    "rating": 3.6,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  {
+    "category": "Bottoms",
+    "description": "These sweatpants aren't just comfortable in the front; they're designed for all-day comfort in the back too. The soft, fleece lining provides a luxurious feel against the skin, while the moisture-wicking fabric keeps you cool and dry. The relaxed fit with a gently tapered leg ensures a comfortable drape without being baggy.  Flatlock seams throughout minimize chafing, and the articulated knees allow for unrestricted movement.  These sweatpants also feature two deep back pockets, perfect for storing your essentials. Whether you're lounging at home or hitting the gym, these sweatpants will keep you comfortable and stylish from every angle. ",
+    "image": "sweatpant3.jpg",
+    "name": "BackSide Sweatpant",
+    "price": 18.0,
+    "rating": 4.1,
+    "sizes": [
+      "28",
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ]
+  },
+  {
+    "category": "Shirts",
+    "description": "Elevate your formal presence with this officially designed shirt. Crafted with high-quality fabric for a luxurious feel and a crisp look that endures, this shirt boasts a tailored fit that flatters all body types.  Officially designed details, spread collar and French cuffs, ensure a timeless elegance perfect for weddings, galas, or important business meetings. Available in classic colors like crisp white and sophisticated black, this dress shirt is a versatile staple for any formal occasion. Pair it with a well-tailored suit and a silk tie for a look that commands respect and exudes confidence.",
+    "image": "shirt2.jpg",
+    "name": "Classic Official Shirt",
+    "price": 30.0,
+    "rating": 4.3,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "category": "Tops",
+    "description": "This T-jacket comes in a range of sizes, catering to both kids and adults. Imagine creating a memorable look by matching with your children! The variety of vibrant colors for kids and more subdued tones for adults, or classic designs with playful accents for a touch of fun offer options for everyone to find their perfect style.",
+    "image": "top4.jpg",
+    "name": "Tank Top",
+    "price": 25.0,
+    "rating": 3.8,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "category": "Shoes",
+    "description": "Recognizable by the iconic canvas upper and rubber sole, Converse have been a symbol of self-expression for generations. They offer a touch of effortless cool to any outfit, whether you're rocking a classic jeans and t-shirt combo or channeling your inner rockstar with ripped jeans and a leather jacket. The Converse Outfit Shoes are available in a range of sizes and colors to suit your style.",
+    "image": "shoes4.jpg",
+    "name": "Converse Outfit Shoes",
+    "price": 35.0,
+    "rating": 4.5,
+    "sizes": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44"
+    ]
+  },
+  {
+    "category": "Bottoms",
+    "description": "These leggings are perfect for workouts. They are made from stretchy, comfortable material. The high waistband provides extra support and coverage. The leggings are available in a range of sizes and colors to suit your style.",
+    "image": "sweatpant7.jpg",
+    "name": "Workout Leggings",
+    "price": 25.0,
+    "rating": 4.4,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "category": "Shirts",
+    "description": "This flannel shirt is perfect for a casual look. It's made from soft, comfortable material. The classic design features a button-down front and long sleeves. The shirt is available in a range of sizes and colors to suit your style. Get yours today and step out in style.",
+    "image": "shirt4.jpg",
+    "name": "Flannel Shirt",
+    "price": 30.0,
+    "rating": 4.2,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  {
+    "category": "T-Shirts",
+    "description": "Made from a super-soft cotton for ultimate comfort during concerts or a breathable blend for everyday wear, this t-shirt feels great against your skin. The [mention fit details, e.g., relaxed fit for a casual vibe or a more fitted silhouette for a sleeker look] ensures all-day comfort, letting you move freely and rock out with confidence.",
+    "image": "t_shirt5.jpg",
+    "name": "Band Tee",
+    "price": 20.0,
+    "rating": 4.3,
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  }
+]
