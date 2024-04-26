@@ -1,13 +1,16 @@
 package com.example.shopease.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopease.activity.DetailActivity
 import com.example.shopease.R
 import com.example.shopease.model.RecommendedModel
+
 
 class RecommendedAdapter(private val recommendedList: List<RecommendedModel>) : RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder>() {
 
@@ -29,6 +32,15 @@ class RecommendedAdapter(private val recommendedList: List<RecommendedModel>) : 
         holder.nameView.text = currentItem.name
         holder.priceView.text = "$${currentItem.price}"
         holder.ratingView.text = currentItem.rating.toString()
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("name", currentItem.name)
+            intent.putExtra("imageResId", currentItem.imageResId)
+            intent.putExtra("price", currentItem.price)
+            intent.putExtra("rating", currentItem.rating)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = recommendedList.size

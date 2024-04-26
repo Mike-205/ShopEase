@@ -70,7 +70,7 @@ class MainViewModel(private val context: Context) : ViewModel() {
             val jsonArray = JSONArray(json)
 
             val recommendedList = mutableListOf<RecommendedModel>()
-            for (i in 0 until jsonArray.length()) {
+            for (i in 0 until 10) {
                 val jsonObject = jsonArray.getJSONObject(i)
                 val name = jsonObject.getString("name")
                 val image = jsonObject.getString("image")

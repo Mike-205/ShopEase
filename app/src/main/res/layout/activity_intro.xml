@@ -42,7 +42,7 @@
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
                         android:layout_height="72dp"
-                        android:text="Beduor"
+                        android:text="Bedour"
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -227,7 +227,7 @@
     </ScrollView>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="65dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="14dp"
@@ -237,7 +237,7 @@
         app:layout_constraintStart_toStartOf="parent">
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="65dp"
             android:layout_gravity="bottom"
 
             android:background="@drawable/rounded_navbar">
@@ -258,14 +258,14 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="14dp"
+                        android:layout_marginTop="10dp"
                         app:srcCompat="@drawable/btn_1" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="1dp"
                         android:text="Explorer"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -283,14 +283,14 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="14dp"
+                        android:layout_marginTop="10dp"
                         app:srcCompat="@drawable/btn_2" />
 
                     <TextView
                         android:id="@+id/textView10"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="1dp"
                         android:text="Cart"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -308,14 +308,14 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="14dp"
+                        android:layout_marginTop="10dp"
                         app:srcCompat="@drawable/btn_5" />
 
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="1dp"
                         android:text="Profile"
                         android:textAlignment="center"
                         android:textColor="@color/white"
