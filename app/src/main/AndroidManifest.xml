@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ShopEase"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DetailActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

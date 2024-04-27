@@ -30,6 +30,11 @@ class DetailActivity : AppCompatActivity() {
         val ratingView: TextView = findViewById(R.id.ratingText)
         val descriptionView: TextView = findViewById(R.id.description)
 
+        val backButton = findViewById<ImageView>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish()
+        }
+
         imageView.setImageResource(imageResId)
         nameView.text = name
         priceView.text = "$$price"

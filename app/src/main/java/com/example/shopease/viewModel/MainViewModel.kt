@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
+
 class MainViewModel(private val context: Context) : ViewModel() {
 
     val sliderData = MutableLiveData<List<SliderModel>>()
@@ -80,6 +81,31 @@ class MainViewModel(private val context: Context) : ViewModel() {
                 recommendedList.add(RecommendedModel(name, image, price, rating, imageResId))
             }
             recommendedData.postValue(recommendedList)
+        }
+    }
+
+    val selectedCategoryData = MutableLiveData<List<RecommendedModel>>()
+
+    fun loadCategoryItems(categoryName: String) {
+        viewModelScope.launch {
+            val inputStream = context.resources.openRawResource(R.raw.data)
+            val json = inputStream.bufferedReader().use { it.readText() }
+            val jsonArray = JSONArray(json)
+
+            val categoryItemsList = mutableListOf<RecommendedModel>()
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val name = jsonObject.getString("name")
+                val image = jsonObject.getString("image")
+                val price = jsonObject.getDouble("price")
+                val rating = jsonObject.getDouble("rating")
+                val category = jsonObject.getString("category")
+                val imageResId = getImageResId(image.removeSuffix(".jpg"))
+                if (category == categoryName) {
+                    categoryItemsList.add(RecommendedModel(name, image, price, rating, imageResId))
+                }
+            }
+            selectedCategoryData.postValue(categoryItemsList)
         }
     }
 

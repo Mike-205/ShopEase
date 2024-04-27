@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.shopease.adapter.RecommendedAdapter
 import com.example.shopease.adapter.SliderAdapter
+import com.example.shopease.model.CategoryModel
 import com.example.shopease.viewModel.MainViewModel
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener {
     private lateinit var viewModel: MainViewModel
+    private lateinit var recommendedRecyclerView: RecyclerView
+    private lateinit var progressBarRec: ProgressBar
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +36,11 @@ class MainActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewpageSlider)
         val recyclerView = findViewById<RecyclerView>(R.id.viewCategory)
         val progressBarCat = findViewById<ProgressBar>(R.id.progressBarCategory)
-        val recommendedRecyclerView = findViewById<RecyclerView>(R.id.viewRecommended)
-        val progressBarRec = findViewById<ProgressBar>(R.id.progressBarRecommended)
+        recommendedRecyclerView = findViewById<RecyclerView>(R.id.viewRecommended)
+        progressBarRec = findViewById<ProgressBar>(R.id.progressBarRecommended)
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRecyclerView.layoutManager = GridLayoutManager(this, 2)
-
 
         // Observe the sliderData LiveData
         viewModel.sliderData.observe(this, { sliderData ->
@@ -48,12 +50,21 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.categoryData.observe(this) { categoryData ->
-            recyclerView.adapter = CategoryAdapter(categoryData)
+            recyclerView.adapter = CategoryAdapter(categoryData, this)
             progressBarCat.visibility = View.GONE // Hide the progress bar
         }
 
         viewModel.recommendedData.observe(this) { recommendedData ->
             recommendedRecyclerView.adapter = RecommendedAdapter(recommendedData)
+            progressBarRec.visibility = View.GONE
+        }
+    }
+
+    override fun onCategoryClick(category: CategoryModel) {
+        viewModel.loadCategoryItems(category.name)
+        viewModel.selectedCategoryData.observe(this) { selectedCategoryData ->
+
+            recommendedRecyclerView.adapter = RecommendedAdapter(selectedCategoryData)
             progressBarRec.visibility = View.GONE
         }
     }

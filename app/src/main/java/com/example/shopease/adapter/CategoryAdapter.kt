@@ -11,7 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shopease.R
 import com.example.shopease.model.CategoryModel
 
-class CategoryAdapter(private val categoryList: List<CategoryModel>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+
+class CategoryAdapter(private val categoryList: List<CategoryModel>, private val listener: OnCategoryClickListener) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+    interface OnCategoryClickListener {
+        fun onCategoryClick(category: CategoryModel)
+    }
 
     private var selectedPosition = RecyclerView.NO_POSITION
 
@@ -25,6 +31,7 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>) : RecyclerV
                 notifyItemChanged(selectedPosition)
                 selectedPosition = layoutPosition
                 notifyItemChanged(selectedPosition)
+                listener.onCategoryClick(categoryList[selectedPosition])
             }
         }
     }
