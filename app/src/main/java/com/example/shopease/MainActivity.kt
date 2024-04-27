@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
             progressBarRec.visibility = View.GONE
         }
     }
+
+    override fun onSelectedCategoryClicked() {
+        viewModel.resetSelectedCategoryData()
+    }
 }
 
 class MainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

@@ -17,6 +17,7 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>, private val
 
     interface OnCategoryClickListener {
         fun onCategoryClick(category: CategoryModel)
+        fun onSelectedCategoryClicked()
     }
 
     private var selectedPosition = RecyclerView.NO_POSITION
@@ -28,10 +29,17 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>, private val
 
         init {
             itemView.setOnClickListener {
-                notifyItemChanged(selectedPosition)
-                selectedPosition = layoutPosition
-                notifyItemChanged(selectedPosition)
-                listener.onCategoryClick(categoryList[selectedPosition])
+                if (layoutPosition == selectedPosition) {
+                    notifyItemChanged(selectedPosition)
+                    selectedPosition = RecyclerView.NO_POSITION
+                    notifyItemChanged(selectedPosition)
+                    listener.onSelectedCategoryClicked()
+                } else {
+                    notifyItemChanged(selectedPosition)
+                    selectedPosition = layoutPosition
+                    notifyItemChanged(selectedPosition)
+                    listener.onCategoryClick(categoryList[selectedPosition])
+                }
             }
         }
     }
