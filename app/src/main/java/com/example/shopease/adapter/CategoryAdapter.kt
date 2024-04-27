@@ -11,22 +11,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shopease.R
 import com.example.shopease.model.CategoryModel
 
-
-
+// CategoryAdapter class that extends RecyclerView.Adapter
 class CategoryAdapter(private val categoryList: List<CategoryModel>, private val listener: OnCategoryClickListener) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
+    // Interface for click listeners
     interface OnCategoryClickListener {
         fun onCategoryClick(category: CategoryModel)
         fun onSelectedCategoryClicked()
     }
 
+    // Variable to keep track of the selected position
     private var selectedPosition = RecyclerView.NO_POSITION
 
+    // ViewHolder class for each item in the RecyclerView
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.pic)
         val textView: TextView = itemView.findViewById(R.id.title1)
         val mainLayout: LinearLayout = itemView.findViewById(R.id.mainLayout)
 
+        // Initialize the ViewHolder
         init {
             itemView.setOnClickListener {
                 if (layoutPosition == selectedPosition) {
@@ -44,11 +47,13 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>, private val
         }
     }
 
+    // Function to create a new ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_category, parent, false)
         return CategoryViewHolder(itemView)
     }
 
+    // Function to bind data to a ViewHolder
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val currentItem = categoryList[position]
         Glide.with(holder.itemView.context)
@@ -56,6 +61,7 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>, private val
             .fitCenter() // or use .centerCrop() if you want to fill the ImageView
             .into(holder.imageView)
 
+        // Change the appearance based on whether the item is selected
         if (position == selectedPosition) {
             holder.textView.text = currentItem.name
             holder.textView.visibility = View.VISIBLE
@@ -68,5 +74,6 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>, private val
         }
     }
 
+    // Function to get the number of items in the RecyclerView
     override fun getItemCount() = categoryList.size
 }

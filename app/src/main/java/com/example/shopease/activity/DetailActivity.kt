@@ -13,28 +13,34 @@ import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 
+// DetailActivity class that extends AppCompatActivity
 class DetailActivity : AppCompatActivity() {
 
+    // onCreate function that is called when the activity is first created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        // Get the intent extras
         val name = intent.getStringExtra("name")
         val imageResId = intent.getIntExtra("imageResId", 0)
         val price = intent.getDoubleExtra("price", 0.0)
         val rating = intent.getDoubleExtra("rating", 0.0)
 
+        // Find the views by their ids
         val imageView: ImageView = findViewById(R.id.productImage)
         val nameView: TextView = findViewById(R.id.productName)
         val priceView: TextView = findViewById(R.id.productValue)
         val ratingView: TextView = findViewById(R.id.ratingText)
         val descriptionView: TextView = findViewById(R.id.description)
 
+        // Set the back button click listener
         val backButton = findViewById<ImageView>(R.id.backButton)
         backButton.setOnClickListener {
             finish()
         }
 
+        // Set the image resource, name, price and rating
         imageView.setImageResource(imageResId)
         nameView.text = name
         priceView.text = "$$price"
@@ -55,6 +61,7 @@ class DetailActivity : AppCompatActivity() {
                 // Convert the JSON array to a list of strings
                 val sizes = List(sizesJsonArray.length()) { j -> sizesJsonArray.getString(j) }
 
+                // Set the adapter and layout manager for the RecyclerView
                 val sizeListRecyclerView = findViewById<RecyclerView>(R.id.sizeList)
                 val sizeAdapter = SizeAdapter(sizes)
                 sizeListRecyclerView.adapter = sizeAdapter
@@ -68,6 +75,8 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
+
+    // Function to load JSON from a raw resource
     private fun loadJSONFromResource(resourceId: Int): String {
         val inputStream: InputStream = resources.openRawResource(resourceId)
         val size: Int = inputStream.available()
