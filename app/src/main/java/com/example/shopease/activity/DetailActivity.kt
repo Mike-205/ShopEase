@@ -44,25 +44,31 @@ class DetailActivity : AppCompatActivity() {
         val jsonStr = loadJSONFromResource(R.raw.data)
         val jsonArray = JSONArray(jsonStr)
 
-        // Get the sizes and description for the product with the same name
-        val productJson = jsonArray.getJSONObject(0)
-        val sizesJsonArray = productJson.getJSONArray("sizes")
-        val description = productJson.getString("description")
+        // Iterate over the JSON array to find the product with the same name
+        for (i in 0 until jsonArray.length()) {
+            val productJson = jsonArray.getJSONObject(i)
+            if (productJson.getString("name") == name) {
+                // Get the sizes and description for the product
+                val sizesJsonArray = productJson.getJSONArray("sizes")
+                val description = productJson.getString("description")
 
-        // Convert the JSON array to a list of strings
-        val sizes = List(sizesJsonArray.length()) { i -> sizesJsonArray.getString(i) }
+                // Convert the JSON array to a list of strings
+                val sizes = List(sizesJsonArray.length()) { j -> sizesJsonArray.getString(j) }
 
-        val sizeListRecyclerView = findViewById<RecyclerView>(R.id.sizeList)
-        val sizeAdapter = SizeAdapter(sizes)
-        sizeListRecyclerView.adapter = sizeAdapter
-        sizeListRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                val sizeListRecyclerView = findViewById<RecyclerView>(R.id.sizeList)
+                val sizeAdapter = SizeAdapter(sizes)
+                sizeListRecyclerView.adapter = sizeAdapter
+                sizeListRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        // Set the description text
-        descriptionView.text = description
+                // Set the description text
+                descriptionView.text = description
+
+                // Break the loop as we've found the matching product
+                break
+            }
+        }
     }
-
-    // Function to load JSON from a raw resource
-    fun loadJSONFromResource(resourceId: Int): String {
+    private fun loadJSONFromResource(resourceId: Int): String {
         val inputStream: InputStream = resources.openRawResource(resourceId)
         val size: Int = inputStream.available()
         val buffer = ByteArray(size)
