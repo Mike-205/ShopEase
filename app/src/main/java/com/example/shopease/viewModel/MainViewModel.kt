@@ -110,6 +110,7 @@ class MainViewModel(private val context: Context) : ViewModel() {
     val selectedCategoryData = MutableLiveData<List<RecommendedModel>>()
 
     // Function to load items of a specific category
+    // Function to load items of a specific category
     fun loadCategoryItems(categoryName: String?) {
         // Launch a new coroutine in background and continue
         viewModelScope.launch {
@@ -123,16 +124,19 @@ class MainViewModel(private val context: Context) : ViewModel() {
             if (categoryName.isNullOrEmpty()) {
                 loadRecommendedData()
             } else {
+                var count = 0
                 for (i in 0 until jsonArray.length()) {
                     val jsonObject = jsonArray.getJSONObject(i)
-                    val name = jsonObject.getString("name")
-                    val image = jsonObject.getString("image")
-                    val price = jsonObject.getDouble("price")
-                    val rating = jsonObject.getDouble("rating")
                     val category = jsonObject.getString("category")
-                    val imageResId = getImageResId(image.removeSuffix(".jpg"))
                     if (category == categoryName) {
+                        val name = jsonObject.getString("name")
+                        val image = jsonObject.getString("image")
+                        val price = jsonObject.getDouble("price")
+                        val rating = jsonObject.getDouble("rating")
+                        val imageResId = getImageResId(image.removeSuffix(".jpg"))
                         categoryItemsList.add(RecommendedModel(name, image, price, rating, imageResId))
+                        count++
+                        if (count == 5) break
                     }
                 }
                 // Post the list to selectedCategoryData LiveData

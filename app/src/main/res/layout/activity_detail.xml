@@ -157,16 +157,16 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@android:style/Widget.Button"
             android:id="@+id/addToCart"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            style="@android:style/Widget.Button"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:layout_weight="1"
             android:layout_margin="8dp"
+            android:layout_weight="1"
             android:background="@drawable/rounded_navbar"
-            android:text="Buy Now" />
+            android:text="Add To Cart"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/cart"

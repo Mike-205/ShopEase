@@ -1,15 +1,20 @@
 package com.example.shopease.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopease.AppData.cartItems
 import com.example.shopease.R
 import com.example.shopease.adapter.SizeAdapter
+import com.example.shopease.model.CartModel
 import org.json.JSONArray
-import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 
@@ -38,6 +43,37 @@ class DetailActivity : AppCompatActivity() {
         val backButton = findViewById<ImageView>(R.id.backButton)
         backButton.setOnClickListener {
             finish()
+        }
+
+        val imageViewCart: ImageView = findViewById(R.id.cart)
+
+        // Set an OnClickListener for the cart image view
+        imageViewCart.setOnClickListener {
+            // Start the CartActivity
+            println("Clicked")
+            val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Find the "Add to Cart" button by its id
+        val addToCartButton = findViewById<Button>(R.id.addToCart)
+
+        // Set an OnClickListener for the button
+        addToCartButton.setOnClickListener {
+            // Create a new CartItem instance with the product details
+            val cartItem = CartModel(imageResId, name, price, price, 1)
+
+            // Check if the item already exists in the cart
+            val itemExistsInCart = cartItems.any { it.productName == cartItem.productName }
+
+            if (itemExistsInCart) {
+                // If the item already exists, display a toast message
+                Toast.makeText(this, "Item is already added to cart", Toast.LENGTH_SHORT).show()
+            } else {
+                // If the item does not exist, add it to the cart and display a toast message
+                cartItems.add(cartItem)
+                Toast.makeText(this, "Item added to cart", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Set the image resource, name, price and rating
