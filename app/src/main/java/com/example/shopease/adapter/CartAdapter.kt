@@ -38,7 +38,6 @@ class CartAdapter(private val cartItems: MutableList<CartModel>, private val con
         holder.numberItems.text = cartItem.quantity.toString()
         holder.imageView.setImageResource(cartItem.imageResId)
 
-
         holder.plusButton.setOnClickListener {
             cartItem.quantity++
             cartItem.total = cartItem.subtotal * cartItem.quantity
@@ -67,11 +66,19 @@ class CartAdapter(private val cartItems: MutableList<CartModel>, private val con
     }
 
     fun calculateDeliveryFee(subtotal: Double): Double {
-        return if (subtotal < 50) 10.0 else subtotal * 0.085
+        return when {
+            cartItems.isEmpty() -> 0.0
+            subtotal < 50 -> 7.0
+            else -> subtotal * 0.065 + 7
+        }
     }
 
     fun calculateTotalTax(subtotal: Double): Double {
-        return if (subtotal < 100) 5.0 else subtotal * 0.05
+        return when {
+            cartItems.isEmpty() -> 0.0
+            subtotal < 100 -> 5.0
+            else -> subtotal * 0.05
+        }
     }
 
     fun calculateGrandTotal(subtotal: Double, deliveryFee: Double, totalTax: Double): Double {

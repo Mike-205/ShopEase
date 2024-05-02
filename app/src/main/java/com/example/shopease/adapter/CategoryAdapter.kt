@@ -1,5 +1,6 @@
 package com.example.shopease.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,16 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopease.MainActivity
 import com.example.shopease.R
 import com.example.shopease.model.CategoryModel
 
 // CategoryAdapter class that extends RecyclerView.Adapter
-class CategoryAdapter(private val categoryList: List<CategoryModel>, private val listener: OnCategoryClickListener) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(
+    private val categoryList: List<CategoryModel>,
+    private val context: Context,
+    private val listener: OnCategoryClickListener // Add this line
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     // Interface for click listeners
     interface OnCategoryClickListener {

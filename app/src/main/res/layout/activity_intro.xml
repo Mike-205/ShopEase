@@ -85,8 +85,8 @@
                     android:id="@+id/viewpageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="24dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +131,6 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:textSize="16sp"
                     android:text="See all"
                     android:textColor="@color/purple"/>
@@ -187,13 +186,6 @@
                     android:text="Recommendation"
                     android:textColor="@color/black"/>
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:text="See all"
-                    android:textColor="@color/purple"/>
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

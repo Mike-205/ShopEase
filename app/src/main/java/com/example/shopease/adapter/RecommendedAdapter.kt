@@ -2,6 +2,7 @@
 package com.example.shopease.adapter
 
 // Import statements
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopease.MainActivity
 import com.example.shopease.activity.DetailActivity
 import com.example.shopease.R
 import com.example.shopease.model.RecommendedModel
 
 // RecommendedAdapter class that extends RecyclerView.Adapter
-class RecommendedAdapter(private val recommendedList: List<RecommendedModel>) : RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder>() {
+class RecommendedAdapter(
+    private val recommendedList: List<RecommendedModel>,
+    private val context: Context
+) : RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder>() {
 
     // ViewHolder class for each item in the RecyclerView
     class RecommendedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
