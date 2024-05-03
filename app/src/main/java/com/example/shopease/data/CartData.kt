@@ -1,8 +1,8 @@
-package com.example.shopease
+package com.example.shopease.data
 
 
 import com.example.shopease.model.CartModel
 
-object AppData {
+object CartData {
     val cartItems = mutableListOf<CartModel>()
 }

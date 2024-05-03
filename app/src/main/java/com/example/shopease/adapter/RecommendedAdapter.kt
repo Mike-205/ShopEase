@@ -2,6 +2,7 @@
 package com.example.shopease.adapter
 
 // Import statements
+import FavoritesManager
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,9 +11,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shopease.MainActivity
 import com.example.shopease.activity.DetailActivity
 import com.example.shopease.R
+import com.example.shopease.util.Utils
 import com.example.shopease.model.RecommendedModel
 
 // RecommendedAdapter class that extends RecyclerView.Adapter
@@ -21,6 +22,7 @@ class RecommendedAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<RecommendedAdapter.RecommendedViewHolder>() {
 
+    private val favoritesManager = FavoritesManager(context)
     // ViewHolder class for each item in the RecyclerView
     class RecommendedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.productImage)
@@ -42,6 +44,9 @@ class RecommendedAdapter(
         holder.nameView.text = currentItem.name
         holder.priceView.text = "$${currentItem.price}"
         holder.ratingView.text = currentItem.rating.toString()
+
+        val favouriteIcon: ImageView = holder.itemView.findViewById(R.id.favouriteIcon)
+        Utils.setupFavoriteIconToggle(favouriteIcon, currentItem.imageResId, R.drawable.btn_3, R.drawable.btn_3_2, favoritesManager)
 
         // Set the click listener for the item view
         holder.itemView.setOnClickListener {

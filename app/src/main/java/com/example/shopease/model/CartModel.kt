@@ -5,5 +5,6 @@ data class CartModel (
     var productName: String?,
     var subtotal: Double,
     var total: Double,
-    var quantity: Int
+    var quantity: Int,
+    var size: String?
 )

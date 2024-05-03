@@ -1,37 +1,42 @@
-// Package declaration
 package com.example.shopease.adapter
 
-// Import statements
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopease.R
 
-// SizeAdapter class that extends RecyclerView.Adapter
-class SizeAdapter(private val sizeList: List<String>) : RecyclerView.Adapter<SizeAdapter.SizeViewHolder>() {
+class SizeAdapter(private val sizes: List<String>) : RecyclerView.Adapter<SizeAdapter.ViewHolder>() {
+    var selectedSize: String? = null
+    private var lastSelectedPosition = -1
 
-    // ViewHolder class for each item in the RecyclerView
-    inner class SizeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val sizeText: TextView = view.findViewById(R.id.sizeText)
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val sizeTextView: TextView = view.findViewById(R.id.sizeText)
+        val sizeLayout: ConstraintLayout = view.findViewById(R.id.sizeLayout)
     }
 
-    // Function to create a new ViewHolder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SizeViewHolder {
-        // Inflate the view for each item
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.viewholder_size, parent, false)
-        return SizeViewHolder(view)
+        return ViewHolder(view)
     }
 
-    // Function to bind data to a ViewHolder
-    override fun onBindViewHolder(holder: SizeViewHolder, position: Int) {
-        // Get the current size
-        val size = sizeList[position]
-        // Set the text of the sizeText TextView to the current size
-        holder.sizeText.text = size
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        holder.sizeTextView.text = sizes[position]
+        holder.sizeTextView.setOnClickListener {
+            lastSelectedPosition = position
+            selectedSize = sizes[position]
+            notifyDataSetChanged()
+        }
+
+        if (lastSelectedPosition == position) {
+            holder.sizeLayout.setBackgroundResource(R.drawable.purple_border)
+        } else {
+            holder.sizeLayout.setBackgroundResource(R.drawable.cart_icon)
+        }
     }
 
-    // Function to get the number of items in the RecyclerView
-    override fun getItemCount() = sizeList.size
+    override fun getItemCount() = sizes.size
 }

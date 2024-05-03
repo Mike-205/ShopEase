@@ -38,6 +38,10 @@ class CartAdapter(private val cartItems: MutableList<CartModel>, private val con
         holder.numberItems.text = cartItem.quantity.toString()
         holder.imageView.setImageResource(cartItem.imageResId)
 
+        // Set the selected size
+        val selectedSize: TextView = holder.itemView.findViewById(R.id.selectedSize)
+        selectedSize.text = cartItem.size
+
         holder.plusButton.setOnClickListener {
             cartItem.quantity++
             cartItem.total = cartItem.subtotal * cartItem.quantity

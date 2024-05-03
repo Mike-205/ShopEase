@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.shopease.activity.CartActivity
+import com.example.shopease.activity.ProfileActivity
 import com.example.shopease.activity.SeeAllCategoryActivity
 import com.example.shopease.adapter.RecommendedAdapter
 import com.example.shopease.adapter.SliderAdapter
@@ -39,12 +40,15 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
         val viewPager = findViewById<ViewPager2>(R.id.viewpageSlider)
         val recyclerView = findViewById<RecyclerView>(R.id.viewCategory)
         val progressBarCat = findViewById<ProgressBar>(R.id.progressBarCategory)
-        val imageViewCart: ImageView = findViewById(R.id.navBtn2)
+        val bottomNavCart: ImageView = findViewById(R.id.cartNav)
+        val bottomNavProfile: ImageView = findViewById(R.id.profileNav)
+
         recommendedRecyclerView = findViewById(R.id.viewRecommended)
         progressBarRec = findViewById(R.id.progressBarRecommended)
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRecyclerView.layoutManager = GridLayoutManager(this, 2)
+
 
         viewModel.sliderData.observe(this) { sliderData ->
             viewPager.adapter = SliderAdapter(this, sliderData)
@@ -67,8 +71,13 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
             progressBarRec.visibility = View.GONE
         }
 
-        imageViewCart.setOnClickListener {
+        bottomNavCart.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+
+        bottomNavProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
 

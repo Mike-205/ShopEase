@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shopease.MainActivity
 import com.example.shopease.R
 import com.example.shopease.adapter.CategoryAdapter
 import com.example.shopease.adapter.RecommendedAdapter
@@ -63,11 +64,17 @@ class SeeAllCategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryCl
         }
 
         explorerItem.setOnClickListener {
-            finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         cartItem.setOnClickListener {
             val intent = Intent(this, CartActivity::class.java)
+            startActivity(intent)
+        }
+
+        profileItem.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }

@@ -33,11 +33,34 @@
         android:id="@+id/feeEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="$0"
-        android:textSize="16sp"
         android:textColor="@color/purple"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/titleText"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Size:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/feeEachItem"
+        app:layout_constraintTop_toBottomOf="@+id/feeEachItem" />
+
+    <TextView
+        android:id="@+id/selectedSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:text="1"
+        android:textColor="@color/purple"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/totaleachItem"

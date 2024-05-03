@@ -1,15 +1,20 @@
 package com.example.shopease.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shopease.AppData.cartItems
+import com.example.shopease.data.CartData.cartItems
 import com.example.shopease.R
 import com.example.shopease.adapter.CartAdapter
+import com.example.shopease.data.OrderData
+import com.example.shopease.model.OrderModel
 
 class CartActivity : AppCompatActivity() {
     // Define adapter and TextViews as properties of the class
@@ -60,6 +65,34 @@ class CartActivity : AppCompatActivity() {
 
         backBtn.setOnClickListener {
             finish()
+        }
+
+        val orderButton: Button = findViewById(R.id.button2)
+        orderButton.setOnClickListener {
+            OrderData.itemsOnOrder.clear()
+            for (item in cartItems) {
+                OrderData.itemsOnOrder.add(
+                    OrderModel(
+                        item.imageResId,
+                        item.productName,
+                        item.subtotal,
+                        item.total,
+                        item.size,
+                        item.quantity
+                    )
+                )
+            }
+            // Display a toast message
+            Toast.makeText(this, "Order successful", Toast.LENGTH_SHORT).show()
+
+            // Navigate to OrdersActivity
+            val intent = Intent(this, OrdersActivity::class.java)
+            startActivity(intent)
+            // Clear the cart items
+            cartItems.clear()
+            // Update the cart values and the RecyclerView
+            updateCartValues()
+            adapter.notifyDataSetChanged()
         }
     }
 
