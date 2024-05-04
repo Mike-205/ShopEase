@@ -9,9 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopease.R
 import com.example.shopease.activity.CartActivity
+import com.example.shopease.manager.OrderManager
 import com.example.shopease.model.OrderModel
 
 class OrderAdapter(private val orderItems: MutableList<OrderModel>, private val context: Context) : RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
+
+    private val orderManager = OrderManager(context)
 
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.orderItemImage)
@@ -39,9 +42,9 @@ class OrderAdapter(private val orderItems: MutableList<OrderModel>, private val 
         holder.imageView.setImageResource(orderItem.imageResId)
 
         holder.cancelButton.setOnClickListener {
+            orderManager.removeOrder(orderItem)
             orderItems.removeAt(position)
             notifyDataSetChanged()
-            // You can add more actions here when an order is cancelled
         }
     }
 

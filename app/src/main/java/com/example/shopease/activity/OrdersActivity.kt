@@ -12,6 +12,8 @@ import com.example.shopease.MainActivity
 import com.example.shopease.R
 import com.example.shopease.adapter.OrderAdapter
 import com.example.shopease.data.OrderData
+import com.example.shopease.manager.OrderManager
+import com.example.shopease.model.OrderModel
 
 class OrdersActivity : AppCompatActivity() {
 
@@ -19,12 +21,18 @@ class OrdersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_orders)
 
+        // Initialize OrderManager
+        val orderManager = OrderManager(this)
+
+        // Get orders from cache
+        val orders: MutableList<OrderModel> = orderManager.getOrdersList().toMutableList()
+
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = OrderAdapter(OrderData.itemsOnOrder, this)
+        recyclerView.adapter = OrderAdapter(orders, this)
 
         val emptyText: TextView = findViewById(R.id.emptyText)
-        if (OrderData.itemsOnOrder.isNotEmpty()) {
+        if (orders.isNotEmpty()) {
             emptyText.visibility = View.GONE
         }
 

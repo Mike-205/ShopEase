@@ -14,6 +14,7 @@ import com.example.shopease.data.CartData.cartItems
 import com.example.shopease.R
 import com.example.shopease.adapter.CartAdapter
 import com.example.shopease.data.OrderData
+import com.example.shopease.manager.OrderManager
 import com.example.shopease.model.OrderModel
 
 class CartActivity : AppCompatActivity() {
@@ -90,6 +91,20 @@ class CartActivity : AppCompatActivity() {
             }
             // Display a toast message
             Toast.makeText(this, "Order successful", Toast.LENGTH_SHORT).show()
+
+            // Convert CartModel objects to OrderModel objects and cache the list
+            val orders = cartItems.map { cartItem ->
+                OrderModel(
+                    cartItem.imageResId,
+                    cartItem.productName,
+                    cartItem.subtotal,
+                    cartItem.total,
+                    cartItem.size,
+                    cartItem.quantity
+                )
+            }
+            val orderManager = OrderManager(this)
+            orderManager.cacheOrdersList(orders)
 
             // Navigate to OrdersActivity
             val intent = Intent(this, OrdersActivity::class.java)
