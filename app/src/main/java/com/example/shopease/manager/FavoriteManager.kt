@@ -2,6 +2,9 @@ package com.example.shopease.manager
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.shopease.model.FavoriteModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 interface FavoritesObserver {
     fun onFavoritesUpdated()
@@ -42,5 +45,20 @@ object FavoritesManager {
         val editor = sharedPreferences.edit()
         editor.remove(itemId.toString())
         editor.apply()
+    }
+
+    fun cacheFavoritesList(favorites: List<FavoriteModel>) {
+        val favoritesJson = Gson().toJson(favorites)
+        sharedPreferences.edit().putString("favorites_list", favoritesJson).apply()
+    }
+
+    fun getFavoritesList(): List<FavoriteModel> {
+        val favoritesJson = sharedPreferences.getString("favorites_list", null)
+        return if (favoritesJson != null) {
+            val type = object : TypeToken<List<FavoriteModel>>() {}.type
+            Gson().fromJson(favoritesJson, type)
+        } else {
+            emptyList()
+        }
     }
 }

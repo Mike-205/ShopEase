@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shopease.MainActivity
 import com.example.shopease.R
 import com.example.shopease.adapter.FavoriteAdapter
-import com.example.shopease.data.FavoriteData
-import com.example.shopease.data.OrderData
+import com.example.shopease.manager.FavoritesManager
 import com.example.shopease.model.FavoriteModel
 
 class FavouriteActivity : AppCompatActivity() {
@@ -19,8 +18,13 @@ class FavouriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favourite)
 
+        // Initialize FavoritesManager
+        FavoritesManager.initialize(this)
+
+        // Get favorite items from cache
+        val favoriteItems: MutableList<FavoriteModel> = FavoritesManager.getFavoritesList().toMutableList()
+
         // Initialize RecyclerView and Adapter
-        val favoriteItems: MutableList<FavoriteModel> = FavoriteData.favoriteItems
         val favoriteAdapter = FavoriteAdapter(favoriteItems)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = favoriteAdapter
@@ -52,7 +56,7 @@ class FavouriteActivity : AppCompatActivity() {
         }
 
         val emptyText: TextView = findViewById(R.id.emptyText)
-        if (FavoriteData.favoriteItems.isNotEmpty()) {
+        if (favoriteItems.isNotEmpty()) {
             emptyText.visibility = View.GONE
         }
     }

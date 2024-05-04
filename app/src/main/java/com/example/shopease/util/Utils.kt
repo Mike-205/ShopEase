@@ -33,6 +33,8 @@ object Utils {
                 val itemToRemove = FavoriteData.favoriteItems.find { it.name == name && it.price == price && it.rating == rating && it.imageResId == itemId }
                 itemToRemove?.let { FavoriteData.favoriteItems.remove(it) }
             }
+            // Cache the updated list
+            FavoritesManager.cacheFavoritesList(FavoriteData.favoriteItems)
         }
     }
 }

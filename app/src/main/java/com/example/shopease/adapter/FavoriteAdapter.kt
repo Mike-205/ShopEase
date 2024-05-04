@@ -39,6 +39,9 @@ class FavoriteAdapter(private val favoriteItems: MutableList<FavoriteModel>) : R
             // Remove the item from the list
             favoriteItems.removeAt(position)
             notifyDataSetChanged()
+
+            // Cache the updated list
+            FavoritesManager.cacheFavoritesList(favoriteItems)
         }
     }
 
