@@ -1,6 +1,6 @@
 package com.example.shopease.activity
 
-import FavoritesManager
+import com.example.shopease.manager.FavoritesManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -20,23 +20,20 @@ import java.io.InputStream
 import java.nio.charset.Charset
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var favoritesManager: FavoritesManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        favoritesManager = FavoritesManager(this)
+        FavoritesManager.initialize(this)
 
         val itemId = intent.getIntExtra("imageResId", 0)
         val favoriteIcon: ImageView = findViewById(R.id.favouriteButton)
-
-        Utils.setupFavoriteIconToggle(favoriteIcon, itemId, R.drawable.btn_3, R.drawable.btn_3_2, favoritesManager)
-
         val name = intent.getStringExtra("name")
         val imageResId = intent.getIntExtra("imageResId", 0)
         val price = intent.getDoubleExtra("price", 0.0)
         val rating = intent.getDoubleExtra("rating", 0.0)
+
+        Utils.setupFavoriteIconToggle(favoriteIcon, itemId, R.drawable.btn_3, R.drawable.btn_3_2, FavoritesManager, name, price, rating)
 
         val imageView: ImageView = findViewById(R.id.productImage)
         val nameView: TextView = findViewById(R.id.productName)
@@ -60,7 +57,7 @@ class DetailActivity : AppCompatActivity() {
         imageView.setImageResource(imageResId)
         nameView.text = name
         priceView.text = "$$price"
-        ratingView.text = "${rating.toString()} ratings"
+        ratingView.text = "${rating} ratings"
 
         val jsonStr = loadJSONFromResource(R.raw.data)
         val jsonArray = JSONArray(jsonStr)

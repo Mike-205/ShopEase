@@ -20,7 +20,7 @@ class ProfileActivity : AppCompatActivity() {
         val backBtn = findViewById<ImageView>(R.id.imageView)
 
         val myOrderBtn = findViewById<ImageView>(R.id.forwardBtn2)
-
+        val myFavBtn = findViewById<ImageView>(R.id.forwardBtn1)
 
         // on click implementation
         backBtn.setOnClickListener {
@@ -39,6 +39,11 @@ class ProfileActivity : AppCompatActivity() {
 
         myOrderBtn.setOnClickListener {
             val intent = Intent(this, OrdersActivity::class.java)
+            startActivity(intent)
+        }
+
+        myFavBtn.setOnClickListener {
+            val intent = Intent(this, FavouriteActivity::class.java)
             startActivity(intent)
         }
     }

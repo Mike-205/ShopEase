@@ -17,10 +17,13 @@ import com.example.shopease.MainActivity
 import com.example.shopease.R
 import com.example.shopease.adapter.CategoryAdapter
 import com.example.shopease.adapter.RecommendedAdapter
+import com.example.shopease.manager.FavoritesManager
+import com.example.shopease.manager.FavoritesObserver
 import com.example.shopease.model.CategoryModel
 import com.example.shopease.viewModel.CategoryViewModel
 
-class SeeAllCategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener {
+class SeeAllCategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener,
+    FavoritesObserver {
     private lateinit var viewModel: CategoryViewModel
     private lateinit var recyclerView2: RecyclerView
     private lateinit var categoryNotSelected: TextView
@@ -90,6 +93,27 @@ class SeeAllCategoryActivity : AppCompatActivity(), CategoryAdapter.OnCategoryCl
 
     override fun onSelectedCategoryClicked() {
         viewModel.resetSelectedCategoryData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        FavoritesManager.addObserver(this)
+        onFavoritesUpdated()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        FavoritesManager.removeObserver(this)
+    }
+
+    override fun onFavoritesUpdated() {
+        // Get the current adapter
+        val adapter = recyclerView2.adapter
+
+        // If the adapter is a RecommendedAdapter, notify it that the data set has changed
+        if (adapter is RecommendedAdapter) {
+            adapter.notifyDataSetChanged()
+        }
     }
 }
 class CategoryViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

@@ -23,6 +23,7 @@ class CartActivity : AppCompatActivity() {
     private lateinit var deliveryFeeTextView: TextView
     private lateinit var totalTaxTextView: TextView
     private lateinit var grandTotalTextView: TextView
+    private lateinit var orderButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,10 @@ class CartActivity : AppCompatActivity() {
         totalTaxTextView = findViewById(R.id.taxText)
         grandTotalTextView = findViewById(R.id.grandTotal)
 
+        // Initialize your order button
+        orderButton = findViewById(R.id.button2)
+        orderButton.isEnabled = false // disable the button initially
+
         // Set the layout manager for your RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -54,11 +59,13 @@ class CartActivity : AppCompatActivity() {
 
         // Check if the cart is empty
         if (adapter.itemCount == 0) {
-            // If the cart is empty, show the empty cart message
+            // If the cart is empty, show the empty cart message and disable the order button
             emptyCartTextView.visibility = View.VISIBLE
+            orderButton.isEnabled = false
         } else {
-            // If the cart is not empty, hide the empty cart message
+            // If the cart is not empty, hide the empty cart message and enable the order button
             emptyCartTextView.visibility = View.GONE
+            orderButton.isEnabled = true
         }
 
         val backBtn: ImageView = findViewById(R.id.backBtn)
@@ -67,7 +74,6 @@ class CartActivity : AppCompatActivity() {
             finish()
         }
 
-        val orderButton: Button = findViewById(R.id.button2)
         orderButton.setOnClickListener {
             OrderData.itemsOnOrder.clear()
             for (item in cartItems) {

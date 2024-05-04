@@ -21,11 +21,14 @@ import com.example.shopease.activity.ProfileActivity
 import com.example.shopease.activity.SeeAllCategoryActivity
 import com.example.shopease.adapter.RecommendedAdapter
 import com.example.shopease.adapter.SliderAdapter
+import com.example.shopease.manager.FavoritesManager
+import com.example.shopease.manager.FavoritesObserver
 import com.example.shopease.model.CategoryModel
 import com.example.shopease.viewModel.MainViewModel
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener {
+class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener,
+    FavoritesObserver {
     private lateinit var viewModel: MainViewModel
     private lateinit var recommendedRecyclerView: RecyclerView
     private lateinit var progressBarRec: ProgressBar
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
+
+        // Initialize FavoritesManager
+        FavoritesManager.initialize(this)
         viewModel = ViewModelProvider(this, MainViewModelFactory(this))[MainViewModel::class.java]
 
         val dotsIndicator = findViewById<DotsIndicator>(R.id.dotsIndicator)
@@ -94,6 +100,27 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
 
     override fun onSelectedCategoryClicked() {
         viewModel.resetSelectedCategoryData()
+    }
+    override fun onResume() {
+        super.onResume()
+        FavoritesManager.addObserver(this)
+        onFavoritesUpdated()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        FavoritesManager.removeObserver(this)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onFavoritesUpdated() {
+        // Get the current adapter
+        val adapter = recommendedRecyclerView.adapter
+
+        // If the adapter is a RecommendedAdapter, notify it that the data set has changed
+        if (adapter is RecommendedAdapter) {
+            adapter.notifyDataSetChanged()
+        }
     }
 }
 
