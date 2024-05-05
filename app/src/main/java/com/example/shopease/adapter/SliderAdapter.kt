@@ -3,6 +3,7 @@ package com.example.shopease.adapter
 
 // Import statements
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shopease.R
+import com.example.shopease.activity.SeeAllCategoryActivity
 import com.example.shopease.model.SliderModel
 
 // SliderAdapter class that extends RecyclerView.Adapter
@@ -32,6 +34,14 @@ class SliderAdapter(private val context: Context, private val sliderData: List<S
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
         // Use Glide to load the image into the ImageView
         Glide.with(context).load(sliderData[position].imageResId).into(holder.imageView)
+
+        // If the position is 0 (first slider image), set an OnClickListener
+        if (position == 0) {
+            holder.imageView.setOnClickListener {
+                val intent = Intent(context, SeeAllCategoryActivity::class.java)
+                context.startActivity(intent)
+            }
+        }
     }
 
     // Function to get the number of items in the RecyclerView

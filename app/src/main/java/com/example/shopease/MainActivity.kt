@@ -122,6 +122,10 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
             adapter.notifyDataSetChanged()
         }
     }
+    override fun onBackPressed() {
+        // This will close the app
+        finishAffinity()
+    }
 }
 
 class MainViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
