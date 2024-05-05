@@ -61,4 +61,6 @@ object FavoritesManager {
             emptyList()
         }
     }
+
+
 }

@@ -3,8 +3,11 @@
     <color name="category_purple">#FFa562fc</color>
     <color name="purple">#FF6033ba</color>
     <color name="lightGrey">#FFe9e9e9</color>
+    <color name="fieldFill">#F5F5F5</color>
     <color name="grey">#FF919191</color>
     <color name="darkGrey">#FF616161</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brightPurple">#5729CE</color>
+    <color name="gettingStartedPurple">#b08ed6</color>
 </resources>

@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+        setContentView(R.layout.activity_main)
 
         // Initialize FavoritesManager
         FavoritesManager.initialize(this)
