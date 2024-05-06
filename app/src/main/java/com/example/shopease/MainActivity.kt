@@ -4,7 +4,9 @@ import com.example.shopease.adapter.CategoryAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -21,25 +23,30 @@ import com.example.shopease.activity.ProfileActivity
 import com.example.shopease.activity.SeeAllCategoryActivity
 import com.example.shopease.adapter.RecommendedAdapter
 import com.example.shopease.adapter.SliderAdapter
+import com.example.shopease.manager.AuthServices
 import com.example.shopease.manager.FavoritesManager
 import com.example.shopease.manager.FavoritesObserver
 import com.example.shopease.model.CategoryModel
+import com.example.shopease.model.UserModel
 import com.example.shopease.viewModel.MainViewModel
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListener,
     FavoritesObserver {
+    private lateinit var authServices: AuthServices
     private lateinit var viewModel: MainViewModel
     private lateinit var recommendedRecyclerView: RecyclerView
     private lateinit var progressBarRec: ProgressBar
+    private lateinit var sharesPrefs: SharedPreferences
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize FavoritesManager
+        // Initialize FavoritesManager & AuthServices
         FavoritesManager.initialize(this)
+        authServices = AuthServices(this)
         viewModel = ViewModelProvider(this, MainViewModelFactory(this))[MainViewModel::class.java]
 
         val dotsIndicator = findViewById<DotsIndicator>(R.id.dotsIndicator)
@@ -48,6 +55,8 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
         val progressBarCat = findViewById<ProgressBar>(R.id.progressBarCategory)
         val bottomNavCart: ImageView = findViewById(R.id.cartNav)
         val bottomNavProfile: ImageView = findViewById(R.id.profileNav)
+        val firstUserName: TextView = findViewById(R.id.textView)
+
 
         recommendedRecyclerView = findViewById(R.id.viewRecommended)
         progressBarRec = findViewById(R.id.progressBarRecommended)
@@ -92,6 +101,15 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
             val intent = Intent(this@MainActivity, SeeAllCategoryActivity::class.java)
             startActivity(intent)
         }
+
+        //Update the userName
+        sharesPrefs = authServices.sharedPreferences
+        val userJson = sharesPrefs.getString(AuthServices.userEmail, null)
+        val user = authServices.gson.fromJson(userJson, UserModel::class.java)
+        val fullUserName = user.username
+        val firstName = fullUserName.split(" ")[0]
+
+        firstUserName.text =firstName
     }
 
     override fun onCategoryClick(category: CategoryModel) {
@@ -123,6 +141,7 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
         }
     }
     override fun onBackPressed() {
+        super.onBackPressed()
         // This will close the app
         finishAffinity()
     }

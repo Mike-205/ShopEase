@@ -85,5 +85,6 @@ dependencies {
     implementation("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("com.tbuonomo:dotsindicator:4.2")
-    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
 }

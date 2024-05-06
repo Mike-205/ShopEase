@@ -3,17 +3,24 @@ package com.example.shopease.activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.shopease.MainActivity
 import com.example.shopease.R
+import com.example.shopease.manager.AuthServices
+import com.example.shopease.model.UserModel
 
 class ProfileActivity : AppCompatActivity() {
+    private lateinit var authservices: AuthServices
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        authservices = AuthServices(this)
 
         val explorerItem = findViewById<ImageView>(R.id.explorerNav)
         val cartItem =findViewById<ImageView>(R.id.cartNav)
@@ -21,6 +28,9 @@ class ProfileActivity : AppCompatActivity() {
 
         val myOrderBtn = findViewById<ImageView>(R.id.forwardBtn2)
         val myFavBtn = findViewById<ImageView>(R.id.forwardBtn1)
+
+        val fullUserName = findViewById<TextView>(R.id.userName)
+
 
         // on click implementation
         backBtn.setOnClickListener {
@@ -56,5 +66,11 @@ class ProfileActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+
+        //ProfileName update
+
+        val userJson = authservices.sharedPreferences.getString(AuthServices.userEmail, null)
+        val user = authservices.gson.fromJson(userJson, UserModel::class.java)
+        fullUserName.text = user.username
     }
 }

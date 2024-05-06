@@ -8,18 +8,19 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import com.example.shopease.MainActivity
+import com.example.shopease.model.FavoriteModel
 import com.example.shopease.model.UserModel
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.IOException
-import java.io.InputStream
-import java.nio.charset.Charset
 
 
 class AuthServices(private val context: Context) {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("AuthPreferences", Context.MODE_PRIVATE)
-    private val gson = Gson()
+    companion object {
+        var userEmail: String? = null
+    }
+
+    var sharedPreferences: SharedPreferences = context.getSharedPreferences("AuthPreferences", Context.MODE_PRIVATE)
+    var gson = Gson()
 
     fun login(email: String, password: String): String {
         // Check if all EditTexts contain data
@@ -50,6 +51,7 @@ class AuthServices(private val context: Context) {
 
         // If all conditions are met, return a success message
         Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show()
+        userEmail = user.email
         // Start MainActivity
         val intent = Intent(context, MainActivity::class.java)
         context.startActivity(intent)
@@ -85,14 +87,16 @@ class AuthServices(private val context: Context) {
         }
 
         // If all conditions are met, create a new user and store it in SharedPreferences
-        val user = UserModel(username, email, password)
+        val user = UserModel(username, email, password, mutableListOf())
         val editor = sharedPreferences.edit()
         val userJson = gson.toJson(user)
+        Log.d("Auth", "userJson: $userJson")
         editor.putString(email, userJson)
         editor.apply()
 
         Toast.makeText(context, "successfully signed up", Toast.LENGTH_SHORT).show()
 
+        userEmail = email
         // Start MainActivity
         val intent = Intent(context, MainActivity::class.java)
         context.startActivity(intent)
