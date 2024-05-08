@@ -86,5 +86,6 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("com.tbuonomo:dotsindicator:4.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.sqlite:sqlite:2.4.0")
 
 }

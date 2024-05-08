@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import com.example.shopease.DatabaseHelper
 import com.example.shopease.MainActivity
 import com.example.shopease.model.FavoriteModel
 import com.example.shopease.model.UserModel
@@ -22,6 +23,8 @@ class AuthServices(private val context: Context) {
     var sharedPreferences: SharedPreferences = context.getSharedPreferences("AuthPreferences", Context.MODE_PRIVATE)
     var gson = Gson()
 
+    private val dbHelper = DatabaseHelper(context)
+
     fun login(email: String, password: String): String {
         // Check if all EditTexts contain data
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
@@ -33,6 +36,12 @@ class AuthServices(private val context: Context) {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(context, "Invalid email format", Toast.LENGTH_SHORT).show()
             return "Invalid email"
+        }
+
+        // Check if the user already exists in the database with the provided email and password
+        if (dbHelper.getUserByEmailAndPassword(email, password) == null) {
+            Toast.makeText(context, "Incorrect email/password", Toast.LENGTH_SHORT).show()
+            return "Incorrect email/password"
         }
 
         // Check if the user exists in SharedPreferences
@@ -78,6 +87,13 @@ class AuthServices(private val context: Context) {
         if (password != confirmPassword) {
             Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
             return "Passwords do not match"
+        }
+
+        // If all conditions are met, insert the new user into the database
+        val newRowId = dbHelper.insertUser(username, email, password)
+        if (newRowId == -1L) {
+            Toast.makeText(context, "Failed to create user", Toast.LENGTH_SHORT).show()
+            return "Failed to create user"
         }
 
         // Check if the user already exists in SharedPreferences
