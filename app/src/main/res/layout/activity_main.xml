@@ -176,15 +176,32 @@
 
                 <TextView
                     android:id="@+id/categoryText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="239dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
                     android:text="Recommendation"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/filter2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/filter" />
+
+                <ImageView
+                    android:id="@+id/sort2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/down_arrow" />
 
             </LinearLayout>
 

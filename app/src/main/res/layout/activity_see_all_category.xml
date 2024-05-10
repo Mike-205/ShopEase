@@ -121,6 +121,22 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/filter2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="17dp"
+                android:src="@drawable/filter" />
+
+            <ImageView
+                android:id="@+id/sort2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/down_arrow" />
+
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
