@@ -2,11 +2,14 @@ package com.example.shopease
 
 import com.example.shopease.adapter.CategoryAdapter
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -28,6 +31,7 @@ import com.example.shopease.manager.FavoritesManager
 import com.example.shopease.manager.FavoritesObserver
 import com.example.shopease.model.CategoryModel
 import com.example.shopease.model.UserModel
+import com.example.shopease.util.SortUtils
 import com.example.shopease.viewModel.MainViewModel
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
@@ -38,7 +42,9 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
     private lateinit var recommendedRecyclerView: RecyclerView
     private lateinit var progressBarRec: ProgressBar
     private lateinit var sharesPrefs: SharedPreferences
+    private lateinit var sortIcon: ImageView
 
+    private var initialArrangement = true
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,14 +62,47 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
         val bottomNavCart: ImageView = findViewById(R.id.cartNav)
         val bottomNavProfile: ImageView = findViewById(R.id.profileNav)
         val firstUserName: TextView = findViewById(R.id.textView)
+        sortIcon = findViewById(R.id.sort2)
+        val filterButton: ImageView = findViewById(R.id.filter2)
 
+        filterButton.setOnClickListener {
+            // Create a Dialog
+            val dialog = Dialog(this)
+
+            // Set the layout of the Dialog to filter_options_viewholder
+            dialog.setContentView(R.layout.filter_options_viewholder)
+
+            // Get the Window object of the Dialog
+            val window = dialog.window
+
+            // Set the gravity to top and end (right)
+            window?.setGravity(Gravity.CENTER or Gravity.END)
+
+            // Get the screen dimensions
+            val displayMetrics = resources.displayMetrics
+            val width = displayMetrics.widthPixels
+            val height = displayMetrics.heightPixels
+
+            // Calculate the position of the Dialog
+            val xPos = (width * 0.2).toInt()  // 10% from the right
+            val yPos = (height * 0.05).toInt()  // 10% from the top
+
+            // Set the position of the Dialog
+            window?.attributes?.x = xPos
+            window?.attributes?.y = yPos
+
+            // Set the background of the dialog to transparent
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            // Display the Dialog
+            dialog.show()
+        }
 
         recommendedRecyclerView = findViewById(R.id.viewRecommended)
         progressBarRec = findViewById(R.id.progressBarRecommended)
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recommendedRecyclerView.layoutManager = GridLayoutManager(this, 2)
-
 
         viewModel.sliderData.observe(this) { sliderData ->
             viewPager.adapter = SliderAdapter(this, sliderData)
@@ -79,11 +118,40 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
         viewModel.recommendedData.observe(this) { recommendedData ->
             recommendedRecyclerView.adapter = RecommendedAdapter(recommendedData, this)
             progressBarRec.visibility = View.GONE
+
+            sortIcon.setOnClickListener{
+
+                // Reverse the sort order for the next click
+                initialArrangement = !initialArrangement
+
+                // Change the sort icon
+                if (initialArrangement) {
+                    recommendedRecyclerView.adapter = RecommendedAdapter(recommendedData, this)
+                    sortIcon.setImageResource(R.drawable.up_arrow)
+                } else {
+                    recommendedRecyclerView.adapter = RecommendedAdapter(SortUtils.sortRecommendedWithoutFilter(recommendedData), this)
+                    sortIcon.setImageResource(R.drawable.down_arrow)
+                }
+            }
         }
 
         viewModel.selectedCategoryData.observe(this) { selectedCategoryData ->
             recommendedRecyclerView.adapter = RecommendedAdapter(selectedCategoryData, this)
             progressBarRec.visibility = View.GONE
+            sortIcon.setOnClickListener{
+
+                // Reverse the sort order for the next click
+                initialArrangement = !initialArrangement
+
+                // Change the sort icon
+                if (initialArrangement) {
+                    recommendedRecyclerView.adapter = RecommendedAdapter(selectedCategoryData, this)
+                    sortIcon.setImageResource(R.drawable.down_arrow)
+                } else {
+                    recommendedRecyclerView.adapter = RecommendedAdapter(SortUtils.sortRecommendedWithoutFilter(selectedCategoryData), this)
+                    sortIcon.setImageResource(R.drawable.up_arrow)
+                }
+            }
         }
 
         bottomNavCart.setOnClickListener {
@@ -113,6 +181,11 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
     }
 
     override fun onCategoryClick(category: CategoryModel) {
+        // Reset the initial arrangement
+        initialArrangement = true
+
+        // Change the sort icon to up_arrow
+        sortIcon.setImageResource(R.drawable.down_arrow)
         viewModel.loadCategoryItems(category.name)
     }
 

@@ -19,6 +19,7 @@ class OrderManager(context: Context) {
         // Save the updated list back to the shared preferences
         cacheOrdersList(orders)
     }
+
     fun cacheOrdersList(orders: List<OrderModel>) {
         val ordersJson = Gson().toJson(orders)
         sharedPreferences.edit().putString("orders_list", ordersJson).apply()
