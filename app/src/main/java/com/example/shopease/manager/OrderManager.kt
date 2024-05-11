@@ -4,10 +4,13 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.shopease.DatabaseHelper
+import com.example.shopease.model.DbOrderModel
 import com.example.shopease.model.OrderModel
 
 class OrderManager(context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("OrderPrefs", Context.MODE_PRIVATE)
+    private val dbHelper = DatabaseHelper(context)
 
     fun removeOrder(order: OrderModel) {
         // Get the current list of orders
@@ -27,6 +30,7 @@ class OrderManager(context: Context) {
 
     fun getOrdersList(): List<OrderModel> {
         val ordersJson = sharedPreferences.getString("orders_list", null)
+        val orders: List<DbOrderModel> = dbHelper.getOrders()
         return if (ordersJson != null) {
             val type = object : TypeToken<List<OrderModel>>() {}.type
             Gson().fromJson(ordersJson, type)

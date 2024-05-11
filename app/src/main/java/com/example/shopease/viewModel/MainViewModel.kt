@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.shopease.DatabaseHelper
 import com.example.shopease.R
 import com.example.shopease.model.CategoryModel
 import com.example.shopease.model.RecommendedModel
@@ -18,6 +19,10 @@ class MainViewModel(private val context: Context) : ViewModel() {
 
     // LiveData for slider data
     val sliderData = MutableLiveData<List<SliderModel>>()
+
+    private val dbHelper = DatabaseHelper(context)
+    private val recommendedDataNew: MutableList<RecommendedModel> = dbHelper.getRecommendedProducts()
+    private val  recommendedDataNewSet = recommendedDataNew.toSet()
 
     init {
         // Load slider data on initialization
@@ -76,6 +81,9 @@ class MainViewModel(private val context: Context) : ViewModel() {
     // LiveData for recommended data
     val recommendedData = MutableLiveData<List<RecommendedModel>>()
 
+    // LiveData for selected category data
+    val selectedCategoryData = MutableLiveData<List<RecommendedModel>>()
+
     init {
         // Load recommended data on initialization
         loadRecommendedData()
@@ -85,74 +93,100 @@ class MainViewModel(private val context: Context) : ViewModel() {
     private fun loadRecommendedData() {
         // Launch a new coroutine in background and continue
         viewModelScope.launch {
-            // Read the JSON file
-            val inputStream = context.resources.openRawResource(R.raw.data)
-            val json = inputStream.bufferedReader().use { it.readText() }
-            val jsonArray = JSONArray(json)
-
             // Create a list of RecommendedModel from the JSON file
-            val recommendedList = mutableListOf<RecommendedModel>()
-            for (i in 0 until 10) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val name = jsonObject.getString("name")
-                val image = jsonObject.getString("image")
-                val price = jsonObject.getDouble("price")
-                val rating = jsonObject.getDouble("rating")
-                val imageResId = getImageResId(image.removeSuffix(".jpg"))
-                recommendedList.add(RecommendedModel(name, image, price, rating, imageResId))
-            }
+            val recommendedList = dbHelper.getRecommendedProducts()
             // Post the list to recommendedData LiveData
             recommendedData.postValue(recommendedList)
+            selectedCategoryData.postValue(recommendedList)
         }
     }
-
-    // LiveData for selected category data
-    val selectedCategoryData = MutableLiveData<List<RecommendedModel>>()
 
     // Function to load items of a specific category
     // Function to load items of a specific category
     fun loadCategoryItems(categoryName: String?) {
         // Launch a new coroutine in background and continue
         viewModelScope.launch {
-            // Read the JSON file
-            val inputStream = context.resources.openRawResource(R.raw.data)
-            val json = inputStream.bufferedReader().use { it.readText() }
-            val jsonArray = JSONArray(json)
-
-            // Create a list of RecommendedModel from the JSON file
-            val categoryItemsList = mutableListOf<RecommendedModel>()
             if (categoryName.isNullOrEmpty()) {
                 loadRecommendedData()
             } else {
-                var count = 0
-                for (i in 0 until jsonArray.length()) {
-                    val jsonObject = jsonArray.getJSONObject(i)
-                    val category = jsonObject.getString("category")
-                    if (category == categoryName) {
-                        val name = jsonObject.getString("name")
-                        val image = jsonObject.getString("image")
-                        val price = jsonObject.getDouble("price")
-                        val rating = jsonObject.getDouble("rating")
-                        val imageResId = getImageResId(image.removeSuffix(".jpg"))
-                        categoryItemsList.add(RecommendedModel(name, image, price, rating, imageResId))
-                        count++
-                        if (count == 5) break
-                    }
-                }
+                var categoryItemsList = mutableListOf<RecommendedModel>()
+                categoryItemsList = dbHelper.getProductsByCategory(categoryName)
                 // Post the list to selectedCategoryData LiveData
                 selectedCategoryData.postValue(categoryItemsList)
             }
         }
+
     }
 
     // Function to reset selected category data
     fun resetSelectedCategoryData() {
         loadRecommendedData()
-        selectedCategoryData.postValue(recommendedData.value)
+        selectedCategoryData.postValue(recommendedDataNew)
     }
 
     // Function to get image resource ID from resource name
     private fun getImageResId(resName: String): Int {
         return context.resources.getIdentifier(resName, "drawable", context.packageName)
+    }
+
+    fun onPriceFilterClicked() {
+        val selectedCategoryDataSet = selectedCategoryData.value!!.toSet()
+        if (selectedCategoryDataSet == recommendedDataNewSet || selectedCategoryData.value == null) {
+            val sortedProducts = dbHelper.getRecommendedProductsAndSortByPrice()
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        } else {
+            val category = dbHelper.getProductCategory(selectedCategoryData.value!![0].name, selectedCategoryData.value!![0].image, selectedCategoryData.value!![0].price, selectedCategoryData.value!![0].rating, selectedCategoryData.value!![0].imageResId)
+            val sortedProducts = dbHelper.getProductsByCategoryAndSortByPrice(category)
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        }
+    }
+    fun onNameFilterClicked() {
+        println(selectedCategoryData.value)
+        val selectedCategoryDataSet = selectedCategoryData.value!!.toSet()
+        if (selectedCategoryDataSet == recommendedDataNewSet || selectedCategoryData.value == null) {
+            val sortedProducts = dbHelper.getRecommendedProductsAndSortByName()
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        } else {
+            val category = dbHelper.getProductCategory(selectedCategoryData.value!![0].name, selectedCategoryData.value!![0].image, selectedCategoryData.value!![0].price, selectedCategoryData.value!![0].rating, selectedCategoryData.value!![0].imageResId)
+            val sortedProducts = dbHelper.getProductsByCategoryAndSortByName(category)
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        }
+    }
+
+    fun onPopularFilterClicked() {
+        val selectedCategoryDataSet = selectedCategoryData.value!!.toSet()
+        if (selectedCategoryDataSet == recommendedDataNewSet || selectedCategoryData.value == null) {
+            resetSelectedCategoryData()
+        } else {
+            val category = dbHelper.getProductCategory(selectedCategoryData.value!![0].name, selectedCategoryData.value!![0].image, selectedCategoryData.value!![0].price, selectedCategoryData.value!![0].rating, selectedCategoryData.value!![0].imageResId)
+            val sortedProducts = dbHelper.getProductsByCategory(category)
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        }
+    }
+
+    fun onRatingFilterClicked() {
+        val selectedCategoryDataSet = selectedCategoryData.value!!.toSet()
+        if (selectedCategoryDataSet == recommendedDataNewSet || selectedCategoryData.value == null) {
+            val sortedProducts = dbHelper.getRecommendedProductsAndSortByRating()
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        } else {
+            val category = dbHelper.getProductCategory(selectedCategoryData.value!![0].name, selectedCategoryData.value!![0].image, selectedCategoryData.value!![0].price, selectedCategoryData.value!![0].rating, selectedCategoryData.value!![0].imageResId)
+            val sortedProducts = dbHelper.getProductsByCategoryAndSortByRating(category)
+            // Now sortedProducts contains the products sorted by price, updating the UI.
+            recommendedData.value = sortedProducts
+            selectedCategoryData.value = sortedProducts
+        }
     }
 }

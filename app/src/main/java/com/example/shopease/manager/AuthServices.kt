@@ -9,7 +9,6 @@ import android.util.Patterns
 import android.widget.Toast
 import com.example.shopease.DatabaseHelper
 import com.example.shopease.MainActivity
-import com.example.shopease.model.FavoriteModel
 import com.example.shopease.model.UserModel
 import com.google.gson.Gson
 
@@ -17,7 +16,7 @@ import com.google.gson.Gson
 class AuthServices(private val context: Context) {
 
     companion object {
-        var userEmail: String? = null
+        lateinit var userEmail: String
     }
 
     var sharedPreferences: SharedPreferences = context.getSharedPreferences("AuthPreferences", Context.MODE_PRIVATE)
@@ -26,6 +25,7 @@ class AuthServices(private val context: Context) {
     private val dbHelper = DatabaseHelper(context)
 
     fun login(email: String, password: String): String {
+
         // Check if all EditTexts contain data
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(context, "All fields must be filled", Toast.LENGTH_SHORT).show()
@@ -92,8 +92,8 @@ class AuthServices(private val context: Context) {
         // If all conditions are met, insert the new user into the database
         val newRowId = dbHelper.insertUser(username, email, password)
         if (newRowId == -1L) {
-            Toast.makeText(context, "Failed to create user", Toast.LENGTH_SHORT).show()
-            return "Failed to create user"
+            Toast.makeText(context, "Email is already in use", Toast.LENGTH_SHORT).show()
+            return "Email is already in use"
         }
 
         // Check if the user already exists in SharedPreferences

@@ -72,6 +72,27 @@ class MainActivity : AppCompatActivity(), CategoryAdapter.OnCategoryClickListene
             // Set the layout of the Dialog to filter_options_viewholder
             dialog.setContentView(R.layout.filter_options_viewholder)
 
+            val nameFilter = dialog.findViewById<TextView>(R.id.name)
+            nameFilter.setOnClickListener {
+                viewModel.onNameFilterClicked()
+                dialog.dismiss()
+            }
+            val priceFilter = dialog.findViewById<TextView>(R.id.price)
+            priceFilter.setOnClickListener {
+                viewModel.onPriceFilterClicked()
+                dialog.dismiss()
+            }
+            val popularFilter = dialog.findViewById<TextView>(R.id.popular)
+            popularFilter.setOnClickListener {
+                viewModel.onPopularFilterClicked()
+                dialog.dismiss()
+            }
+            val ratingFilter = dialog.findViewById<TextView>(R.id.rating)
+            ratingFilter.setOnClickListener {
+                viewModel.onRatingFilterClicked()
+                dialog.dismiss()
+            }
+
             // Get the Window object of the Dialog
             val window = dialog.window
 
